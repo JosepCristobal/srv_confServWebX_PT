@@ -91,3 +91,52 @@ Con este documento intento detallar todos los pasos que se han seguido en la con
 	- Activar acceso https para todos los accesos.
 	- Arrancar servicios de node de forma automática con supervisor.
 76. Vamos a por MongoDB.
+77. Pasamos a usuario ubuntu
+78. Creamos usuario admin en MongoDB con el rol de userAdminAnyDatabase y readWriteAnyDatabase.
+79. Entramos en la shell de Mongo
+80. use admin y creamos el usuario. Ver web de mongo
+81. Modificamos el fichero /etc/mongod.conf
+82. Descomentamos securyty , pulsamos intro, añadimos dos espacios y escribimos authorization: enabled
+83. Reiniciamos el servicio de MongoDB: sudo systemctl restart mongod
+84. Conectamos a mongo: mongo --authenticationDatabase admin -u admin -p
+85. Una vez conectados como administrador, creamos un usuario para nodepop.
+86. Nos situamos en cursonode: use cursonodes y creamos el usuario según el script de ejemplo del curso o de la documentación de mongo en la web.
+87. Ahora para conectarnos a la BBDD deberemos hacerlo con la siguiente cadena de conexión
+88. mongodb://cursonode:miPassword@127.0.0.1:27017/cursonode
+89. Lo probamos y funciona. Ahora debemos cambiar la cadena de conexión en nuestro fichero .env
+90. El siguiente paso será el de arrancar node con Supervisor.
+91. Instalamos supervisor con sudo apt install supervisor.
+92. Estamos con el usuario ubuntu.
+93. Ahora debemos crear un fichero de configuración y lo hacemos en /etc/supervisor/conf.d/cursonode.conf según configuración de los apuntes de clase. También podemos consultar en la web de supervisor.
+94. Verificamos que funcione y arranque el servicio correctamente.
+95. sudo systemctl status supervisor
+96. Reiniciamos las instancias para ver si arrancan todos los servicios que hemos ido instalando y todo arrancado de forma correcta.
+97. Ahora creamos otro fichero de configuración para supervisor con el proposito de que nos arranque un microservicio que tenemos en nuestro proyecto de node que nos crea thumnails de la fotos de los anuncios. micronode.conf
+98. Reiniciamos supervisor y todos los servicios arrancan de forma correcta,
+99. A continuación configuraremos nginx para que actúe de proxy inverso y podamos acceder a los servicios de node por el puerto 80 o 443.
+100. Creamos fichero de configuración para acceder a nuestro servicio de node, lo llamaremos nodepopapi en sites-available
+101. Ahora deberemos crear un acceso directo en sites-enabled con el comando  sudo ln -s /etc/nginx/sites-available/nodepopapi /etc/nginx/sites-anabled/nodepopapi.
+102. Verificamos que hemos hecho bien la configuración y hacemos un reload de nginx
+103. sudo nginx -t
+104. sudo systemctl reload nginx
+105. Comprobamos y funciona correctamente.
+106. Editamos los ficheros de configuración de nginx para añadirles que todos los ficheros estáticos de nuestra apps de node nos los sirva nginx y les añada una cabecera personalizada.
+107. Verificamos y funciona correctamente.
+108. Ahora que tenemos funcionando nginx como proxy inverso, vamos a deshabilitar el puerto 3000 en nuestro firewall de AWS y verificamos que nuestra aplicación en node sigue funcionando por el puerto 80
+109. Por último, vamos a implementar el https en todos los accesos a nuestra web.
+110. Utilizaremos certificados gratuitos de letsencrypt y los gestionaremos de forma muy sencilla con certbot.
+111. Instalamos certbot en nuestro servidor con el usuario ubuntu
+112. sudo apt install certbot
+113. sudo apt install python3-certbot-nginx
+114. Una vez instalado, deberemos configurar certbot y decirle que trabaje con nginx
+115. sudo certbot --nginx a partir de este punto deberemos contestar una serie de preguntas que condicionarán el funcionamiento de nginx y los certificados.
+	- Nos pide el e-mail y lo ponemos. Es para casos de emergéncia.
+	- Pide aceptar licencia. Pulsamos la tecla A
+	- Pide e-mail para ceder datos y contestamos que N
+	- Nos muestra todos los dominios configurados en nuestro nginx y pulsamos intro para aceptarlos todos.
+	- Nos genera los certificados y nos da el succesfull.
+	- Finalmente nos pregunta si todas las peticiones http las redirige hacia https y contestamos 2 (que es que si)
+	- Congratulations!! Ya tenemos nuetro https funcionando con certificados totalmente válidos.
+116. Por último, vamos a nuestro servidor en AWS y habilitamos el puerto 443 de entrada en el firewall.
+117. Verificamos que todo esté funcionando correctamente y así es.
+118. Damos la práctica por finalizada y funcionando.
