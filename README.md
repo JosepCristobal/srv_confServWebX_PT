@@ -33,7 +33,7 @@ Todas la funcionalidades se han probado y están operativas.
 
 ## Paso a Paso
 Guia de despliegue para el yo del mañana.
-
+[Step by Step](https://github.com/JosepCristobal/srv_confServWebX_PT/blob/master/README_Step_By_Step.md)
 
 ## Conclusiones finales
 
