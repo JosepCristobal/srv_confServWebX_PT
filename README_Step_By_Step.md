@@ -68,3 +68,26 @@ Con este documento intento detallar todos los pasos que se han seguido en la con
 55. Ahora, en el directorio raiz de nuestra aplicación creamos un fichero .env para indicar dos variables de entorno que debemos configurar.
 56. Ahora nos situamos como usuario ubuntu
 57. Instalamos MongoDB
+58. Descargamos con wget.
+59. Vamos a Mongo comunity y copiamos los enlaces de descarga con la configuración
+60. version 4.4.6 ubuntu 20.06 server
+61. version 4.4.6 ubuntu 20.06 shell(deb)
+62. Para instalarlo
+63. sudo dpkg -i mongodb-org-server .deb
+64. sudo dpkg -i mongodb-org-shell   .deb
+65. Una vez instalado, arrancamos mongoDB manualmente para verificar que funciona correctamente.
+66. sudo systemctl start mongod
+67. Ahora pasaremos un comando para que arranque siempre con el S.O.
+68. sudo systemctl enable mongod
+69. Nos creará un link al sistema de arranque del SO
+70. Ahora nos situamos en la raiz de nuestro proyecto de node y ejecutamos nuestro script de inicialización
+71. npm run installDB
+72. Ha funcionado!!!
+73. Hacemos pruebas y conseguimos visualizar datos en navegador web y en Postman.
+74. Para conseguir llegar a nuestra aplicación de node hemos abierto el puerto 3000 en el firewall de nuestro servidor de AWS.
+75. Siguientes pasos: 
+	- Vamos a securizar mongo para que utilice usuario y contraseña para acceder a la BBDD.
+	- Acceso al API a través de Nginx.
+	- Activar acceso https para todos los accesos.
+	- Arrancar servicios de node de forma automática con supervisor.
+76. Vamos a por MongoDB.
