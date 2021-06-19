@@ -131,6 +131,7 @@ Con este documento intento detallar todos los pasos que se han seguido en la con
 113. sudo apt install python3-certbot-nginx
 114. Una vez instalado, deberemos configurar certbot y decirle que trabaje con nginx
 115. sudo certbot --nginx a partir de este punto deberemos contestar una serie de preguntas que condicionarán el funcionamiento de nginx y los certificados.
+
 	- Nos pide el e-mail y lo ponemos. Es para casos de emergéncia.
 	- Pide aceptar licencia. Pulsamos la tecla A
 	- Pide e-mail para ceder datos y contestamos que N
@@ -138,6 +139,7 @@ Con este documento intento detallar todos los pasos que se han seguido en la con
 	- Nos genera los certificados y nos da el succesfull.
 	- Finalmente nos pregunta si todas las peticiones http las redirige hacia https y contestamos 2 (que es que si)
 	- Congratulations!! Ya tenemos nuetro https funcionando con certificados totalmente válidos.
+	
 116. Por último, vamos a nuestro servidor en AWS y habilitamos el puerto 443 de entrada en el firewall.
 117. Verificamos que todo esté funcionando correctamente y así es.
 118. Damos la práctica por finalizada y funcionando.
